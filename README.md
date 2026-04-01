@@ -1,9 +1,9 @@
-# Horizontal Gauge Card
+# Linear Gauge Card
 
-A highly customizable horizontal gauge card with a needle indicator for Home Assistant.
+A highly customizable linear gauge card with a needle indicator for Home Assistant.
 Inspired by Home Assistant Tile card.
 
-![Horizontal Gauge Card Examples](image.png)
+![Linear Gauge Card Examples](image.png)
 
 ## Features
 - With minimalistic settings occupies only 1 row 
@@ -18,16 +18,16 @@ Inspired by Home Assistant Tile card.
 ### HACS (Recommended)
 1. Open HACS in your Home Assistant instance.
 2. Click the 3 dots in the top right corner and select **Custom repositories**.
-3. Add your repository URL (`https://github.com/YOUR_USERNAME/YOUR_REPO_NAME`).
+3. Add your repository URL (`https://github.com/ciocotab-cpu/linear-gauge-card`).
 4. Select **Dashboard** as the category and click **Add**.
-5. Close the modal, search for "Horizontal Gauge Card", and click **Download**.
+5. Close the modal, search for "Linear Gauge Card", and click **Download**.
 6. Refresh your browser cache.
 
 ### Manual
-1. Download `horizontal-gauge-card.js` from this repository.
+1. Download `linear-gauge-card.js` from this repository.
 2. Copy it into your `<config>/www/` directory.
 3. Go to **Settings > Dashboards > 3 dots (top right) > Resources**.
-4. Add a new resource with the URL `/local/horizontal-gauge-card.js` and set the Resource Type to `JavaScript Module`.
+4. Add a new resource with the URL `/local/linear-gauge-card.js` and set the Resource Type to `JavaScript Module`.
 
 ## Defining Segments
 
@@ -61,7 +61,7 @@ variables:
   - states['input_number.price_normal'].state
   - states['input_number.price_expensive'].state
 card:
-  type: custom:horizontal-gauge-card
+  type: custom:linear-gauge-card
   entity: sensor.electricity_price_with_tax_in_cents
   name: Electricity Price With Tax
   min: -5
@@ -79,4 +79,4 @@ card:
 
 
 ## Usage
-Simply add a new card to your dashboard and select **Horizontal Gauge Card** from the visual picker. You can configure all colors, limits, fonts, and labels directly in the UI.
+Simply add a new card to your dashboard and select **Linear Gauge Card** from the visual picker. You can configure all colors, limits, fonts, and labels directly in the UI.

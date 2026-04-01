@@ -1,7 +1,7 @@
-// horizontal-gauge-card.js
-// Home Assistant Custom Card - Horizontal Gauge with Needle
+// linear-gauge-card.js
+// Home Assistant Custom Card - Linear Gauge with Needle
 
-class HorizontalGaugeCard extends HTMLElement {
+class LinearGaugeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -580,7 +580,7 @@ class HorizontalGaugeCard extends HTMLElement {
   }
 }
 
-customElements.define('horizontal-gauge-card', HorizontalGaugeCard);
+customElements.define('linear-gauge-card', LinearGaugeCard);
 
 // -------------------------------------------------------------
 // Editor Code Below
@@ -736,7 +736,7 @@ const SCHEMA = [
   }
 ];
 
-class HorizontalGaugeCardEditor extends HTMLElement {
+class LinearGaugeCardEditor extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -826,24 +826,24 @@ class HorizontalGaugeCardEditor extends HTMLElement {
   }
 }
 
-customElements.define("horizontal-gauge-editor", HorizontalGaugeCardEditor);
+customElements.define("linear-gauge-editor", LinearGaugeCardEditor);
 
 window.customCards = window.customCards || [];
-const cardIndex = window.customCards.findIndex(c => c.type === "horizontal-gauge-card");
+const cardIndex = window.customCards.findIndex(c => c.type === "linear-gauge-card");
 if (cardIndex === -1) {
   window.customCards.push({
-    type: 'horizontal-gauge-card',
-    name: 'Horizontal Gauge Card',
-    description: 'A horizontal gauge bar with needle indicator',
+    type: 'linear-gauge-card',
+    name: 'linear Gauge Card',
+    description: 'A linear gauge bar with needle indicator',
     preview: false,
   });
 }
 
-customElements.whenDefined('horizontal-gauge-card').then(() => {
-    const cardConstructor = customElements.get('horizontal-gauge-card');
+customElements.whenDefined('linear-gauge-card').then(() => {
+    const cardConstructor = customElements.get('linear-gauge-card');
 
     cardConstructor.getConfigElement = function() {
-        return document.createElement("horizontal-gauge-editor");
+        return document.createElement("linear-gauge-editor");
     };
 
     cardConstructor.getStubConfig = function() {
