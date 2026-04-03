@@ -9,8 +9,14 @@
         .container { width: 500px; margin: 0 auto; }
         h2 { color: #03a9f4; font-size: 14px; text-transform: uppercase; }
     </style>
-    
-    <script type="module" src="./linear-gauge-card.js"></script>
+    <script type="module">
+        // Importiamo Lit da internet così la card può "disegnare" se stessa
+        import { LitElement, html, css } from 'https://unpkg.com/lit@2.0.0?module';
+        window.LitElement = LitElement;
+        window.html = html;
+        window.css = css;
+    </script>    
+    <script type="module" src="linear-gauge-card.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,6 +35,7 @@
                 name: "Livello Batteria",
                 show_icon: true,
                 gradient: true,
+                needle_pulse: true,
                 show_icon_right: true, // La tua nuova funzione
                 icon_right: "mdi:battery-90",
                 show_value_labels: true,
@@ -54,6 +61,7 @@
                 }
             };
         });
+
     </script>
 </body>
 </html>

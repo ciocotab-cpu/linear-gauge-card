@@ -32,6 +32,7 @@ class LinearGaugeCard extends HTMLElement {
         min: 0,
         max: 100,
         show_icon: true,
+        double_line: true,
         show_icon_right: false,
         icon_right: null,
         show_name: true,
@@ -41,9 +42,9 @@ class LinearGaugeCard extends HTMLElement {
         show_value_labels: false,
         needle: true,
         needle_pulse: true,
-        needle_width: 2,
+        needle_width: 20,
         needle_color: '#ffffff',
-        icon_left_color: '#ffffff',
+        icon_left_color: '#000000',
         icon_right_color: '#ffffff',
         needle_shadow: true,
         show_needle_label: false,
@@ -225,8 +226,8 @@ _resolveSegmentsAndMax(min, configMax) {
     // Enforce 2 rows max (56px or 120px)
     //const minHeight = this._display_rows === 1 ? '56px' : '120px';
     let minHeight = '56px'; // Altezza base (Tile standard)
-    if (this._config.show_value_labels) {
-        minHeight = '64px'; // Aumento leggero solo per far stare i numeri
+    if (this._config.double_line) {
+        minHeight = '112px'; // Aumento leggero solo per far stare i numeri
     }
 
     const cardStyle = `
@@ -416,20 +417,6 @@ _resolveSegmentsAndMax(min, configMax) {
       }
     `;
 
-    if (this._config.needle_pulse) {
-      const el = document.getElementById('needle');
-
-      const pulseAnimation = el.animate([
-        { transform: 'scale(1)', opacity: 1 },
-        { transform: 'scale(1.2)', opacity: 0.7 },
-        { transform: 'scale(1)', opacity: 1 }
-      ], {
-        duration: 1000,
-        iterations: Infinity,
-        easing: 'ease-in-out'
-      });
-    }
-    
     const icon = this._config.icon || (entity && entity.attributes && entity.attributes.icon);
     let iconTemplate = '';
 
@@ -562,6 +549,7 @@ _resolveSegmentsAndMax(min, configMax) {
     this._elements.unavailable = this.shadowRoot.getElementById('unavailable-text');
     this._elements.card = this.shadowRoot.getElementById('card');
 
+
     if (this._elements.card) {
       this._elements.card.addEventListener('click', this._handleAction);
 
@@ -639,6 +627,22 @@ _resolveSegmentsAndMax(min, configMax) {
         this._elements.needleValue.style.left = `${pctClamped}%`;
         this._elements.needleValue.textContent = displayString;
       }
+        const needleEl = this.shadowRoot.querySelector('#needle');
+
+      if (needleEl) {
+          // Usiamo filter invece di transform per non interferire con il 'left'
+          needleEl.animate([
+            { transform: 'scale(1)', transformOrigin: 'center', offset: 0 },
+            { transform: 'scale(1.2)', transformOrigin: 'center', offset: 0.08 },
+            { transform: 'scale(1)', transformOrigin: 'center', offset: 0.16 },
+            { transform: 'scale(1)', transformOrigin: 'center', offset: 1 }
+          ], {
+              duration: 6000,
+              iterations: Infinity,
+              easing: 'ease-in-out'
+          });
+      }
+
     } else {
       if (this._elements.needle) this._elements.needle.style.display = 'none';
       if (this._elements.needleValue) this._elements.needleValue.style.display = 'none';
@@ -665,6 +669,7 @@ const fireEvent = (node, type, detail, options) => {
   return event;
 };
 
+
 const SCHEMA = [
   {
     name: "entity",
@@ -676,6 +681,7 @@ const SCHEMA = [
     schema: [
       { name: "name", selector: { text: {} } },
       { name: "show_name", selector: { boolean: {} } },
+      { name: "double_line", selector: { boolean: {} } },
       { name: "min", selector: { number: { mode: "box", step: 1 } } },
       { name: "max", selector: { number: { mode: "box", step: 1 } } },
       { name: "show_value", selector: { boolean: {} } },
@@ -869,6 +875,7 @@ class LinearGaugeCardEditor extends HTMLElement {
   _computeLabel(schema) {
     const customLabels = {
       entity: "Entity",
+      double_line: "Double Line",
       name: "Name",
       icon: "Icon Left",
       icon_right: "Icon Right",
