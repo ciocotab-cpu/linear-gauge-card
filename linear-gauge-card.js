@@ -31,8 +31,8 @@ class LinearGaugeCard extends HTMLElement {
       {
         min: 0,
         max: 100,
-        show_icon: true,
-        double_line: true,
+        show_icon_left: true,
+        double_line: false,
         show_icon_right: false,
         icon_right: null,
         show_name: true,
@@ -44,8 +44,8 @@ class LinearGaugeCard extends HTMLElement {
         needle_pulse: true,
         needle_width: 20,
         needle_color: '#ffffff',
-        icon_left_color: '#000000',
-        icon_right_color: '#ffffff',
+        icon_left_color: '#0000ff',
+        icon_right_color: '#ff0000',
         needle_shadow: true,
         show_needle_label: false,
         decimals: 1,
@@ -219,6 +219,9 @@ _resolveSegmentsAndMax(min, configMax) {
     const barThickness = thicknessNum || autoThickness;
     const barRadius = barThickness / 2;
 
+    const iconleftcolor = this._config.icon_left_color ? `${this._config.icon_left_color}` : '#ffffff';
+    const iconrightcolor = this._config.icon_right_color ? `${this._config.icon_right_color}` : '#ffffff';
+
     const nameSize = this._config.name_font_size ? `${this._config.name_font_size}px` : 'var(--tile-info-primary-font, 14px)'; 
     const valueSize = this._config.value_font_size ? `${this._config.value_font_size}px` : 'var(--tile-info-primary-font, 14px)'; 
     const labelSize = this._config.label_font_size ? `${this._config.label_font_size}px` : 'var(--ha-font-size-sm, 10px)';
@@ -260,37 +263,34 @@ _resolveSegmentsAndMax(min, configMax) {
       .card-content {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         align-items: flex-start;
         padding-top: 0px;
         width: 100%;
         height: 100%;
         padding: 0 6px;
+        box-sizing: border-box;
       }
 
-      .icon { 
-        margin-right: 12px; 
-        color: ${this._config.icon_left_color || '#ffffff'};
-      }
+      .icon-left { 
+        color: ${iconleftcolor} !important;
+      } 
 
       .icon-right { 
-        margin-left: 12px;
-        color: ${this._config.icon_right_color || '#ffffff'};
-      }
+        color: ${iconrightcolor} !important;
+      } 
 
       .icon-container {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 12px;
         width: 40px;
         height: 40px;
         border-radius: 50%;
         background-color: var(--state-icon-active-color, rgba(68, 115, 158, 0.2));
         flex-shrink: 0;
       }
-      .icon {
-        color: var(--state-icon-color, var(--paper-item-icon-color, #44739e));
-      }
+
       .main {
         display: flex;
         flex-direction: column;
@@ -417,25 +417,25 @@ _resolveSegmentsAndMax(min, configMax) {
       }
     `;
 
-    const icon = this._config.icon || (entity && entity.attributes && entity.attributes.icon);
-    let iconTemplate = '';
+    const iconleft = this._config.icon_left || (entity && entity.attributes && entity.attributes.icon);
+    let iconLeftTemplate = '';
 
-    if (this._config.show_icon) {
-      if (icon) {
-        iconTemplate = `<div class="icon-container"><ha-icon class="icon" icon="${icon}"></ha-icon></div>`;
+    if (this._config.show_icon_left) {
+      if (iconleft) {
+        iconLeftTemplate = `<div class="icon-container icon-left"><ha-icon class="icon-left" icon="${iconleft}"></ha-icon></div>`;
       } else {
-        iconTemplate = `<div class="icon-container"><ha-state-icon class="icon" id="state-icon"></ha-state-icon></div>`;
+        iconLeftTemplate = `<div class="icon-container icon-left"><ha-state-icon class="icon-left" id="state-icon"></ha-state-icon></div>`;
       }
     }
 
-  const iconRight = this._config.icon_right || (entity && entity.attributes && entity.attributes.icon);
+    const iconRight = this._config.icon_right || (entity && entity.attributes && entity.attributes.icon);
     let iconRightTemplate = '';
 
     if (this._config.show_icon_right) {
-      if (this._config.icon_right) { // Se l'utente ha scelto un'icona specifica nell'editor
-        iconRightTemplate = `<div class="icon-container icon-right"><ha-icon class="icon" icon="${this._config.icon_right}"></ha-icon></div>`;
-      } else { // Altrimenti usa l'icona dinamica dello stato
-        iconRightTemplate = `<div class="icon-container icon-right"><ha-state-icon class="icon" id="state-icon-right"></ha-state-icon></div>`;
+      if (iconRight) {
+        iconRightTemplate = `<div class="icon-container icon-right"><ha-icon class="icon-right" icon="${iconRight}"></ha-icon></div>`;
+      } else {
+        iconRightTemplate = `<div class="icon-container icon-right"><ha-state-icon class="icon-right" id="state-icon-right"></ha-state-icon></div>`;
       }
     }
 
@@ -529,13 +529,13 @@ _resolveSegmentsAndMax(min, configMax) {
       <style>${cardStyle}</style>
       <ha-card id="card" role="button" tabindex="0">
         <div class="card-content">
-          ${iconTemplate}
+          ${iconLeftTemplate}
           <div class="main">
             ${headerHTML}
             ${mainContent}
             <div class="unavailable" id="unavailable-text">Unavailable</div>
           </div>
-		  ${iconRightTemplate}
+		      ${iconRightTemplate}
         </div>
       </ha-card>
     `;
@@ -701,9 +701,9 @@ const SCHEMA = [
         type: "grid",
         name: "",
         schema: [
-          { name: "show_icon", selector: { boolean: {} } },
+          { name: "show_icon_left", selector: { boolean: {} } },
           { name: "show_icon_right", selector: { boolean: {} } },
-          { name: "icon", selector: { icon: {} } },
+          { name: "icon_left", selector: { icon: {} } },
           { name: "icon_right", selector: { icon: {} } },
           { name: "icon_left_color", selector: { text: {} } }, // Added color text input
           { name: "icon_right_color", selector: { text: {} } }, // Added color text input
@@ -877,13 +877,13 @@ class LinearGaugeCardEditor extends HTMLElement {
       entity: "Entity",
       double_line: "Double Line",
       name: "Name",
-      icon: "Icon Left",
+      icon_left: "Icon Left",
       icon_right: "Icon Right",
       min: "Minimum Value",
       max: "Maximum Value",
       gradient: "Soft Transitions",
       show_name: "Show Name",
-      show_icon: "Show Left Icon",
+      show_icon_left: "Show Left Icon",
       show_icon_right: "Show Right Icon",
       show_value: "Show Value",
       decimals: "Decimals",

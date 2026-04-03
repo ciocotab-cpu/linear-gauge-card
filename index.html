@@ -23,7 +23,19 @@
         <h2>Anteprima Card</h2>
         <linear-gauge-card id="preview"></linear-gauge-card>
     </div>
-
+    <script type="module" src="https://unpkg.com/iconify-icon@1.0.8/dist/iconify-icon.mjs"></script>
+    <script>
+    // Questo script trasforma i tag <ha-icon> in icone visibili nell'anteprima
+    customElements.define('ha-icon', class extends HTMLElement {
+        static get observedAttributes() { return ['icon', 'style']; }
+        attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'icon') {
+            const iconName = newValue.replace('mdi:', '');
+            this.innerHTML = `<iconify-icon icon="mdi:${iconName}"></iconify-icon>`;
+        }
+        }
+    });
+    </script>
     <script>
         // Aspettiamo che l'elemento sia definito
         customElements.whenDefined('linear-gauge-card').then(() => {
@@ -38,6 +50,8 @@
                 needle_pulse: true,
                 show_icon_right: true, // La tua nuova funzione
                 icon_right: "mdi:battery-90",
+                icon_left_color: "#ffff00",
+                icon_right_color: "#00ff00",
                 show_value_labels: true,
                 min: 0,
                 max: 200,
