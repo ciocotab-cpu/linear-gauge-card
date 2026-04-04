@@ -264,19 +264,20 @@ _resolveSegmentsAndMax(min, configMax) {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: flex-start;
-        padding-top: 0px;
+        #align-items: flex-start;
+        #padding-top: 0px;
         width: 100%;
         height: 100%;
-        padding: 0 6px;
         box-sizing: border-box;
       }
 
       .icon-left { 
+        align-items: center;
         color: ${iconleftcolor} !important;
       } 
 
       .icon-right { 
+        align-items: center;
         color: ${iconrightcolor} !important;
       } 
 
@@ -285,6 +286,8 @@ _resolveSegmentsAndMax(min, configMax) {
         align-items: center;
         justify-content: center;
         width: 40px;
+        margin-left: 6px;
+        margin-right: 6px;
         height: 40px;
         border-radius: 50%;
         background-color: var(--state-icon-active-color, rgba(68, 115, 158, 0.2));
