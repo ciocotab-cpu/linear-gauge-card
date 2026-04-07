@@ -1,17 +1,18 @@
-# Linear Gauge Card
+# Another Linear Gauge Card
 
 This project is a fork of the project https://github.com/iljanev/ha-horizontal-gauge-card
 A highly customizable linear gauge card with a needle indicator for Home Assistant.
 Inspired by Home Assistant Tile card.
 
 
+![Another Linear Gauge Card Examples](new.webm)
 ## My New Features
 - Transition between segment color can be smooth
 - Added icon on the rigth
 - Can Change Icon color
 - The bar total refere to indicated value and not the sum of the segments
 - Needle Pulse
-- Set double line
+- Set single/double line vertical dimension
 
 ![Linear Gauge Card Examples](image.png)
 ## Original Features
@@ -26,20 +27,25 @@ Inspired by Home Assistant Tile card.
 
 ### HACS (Recommended)
 1. Open HACS in your Home Assistant instance.
+2. Search for "Another Linear Gauge Card"..
+3. Select and Download.
+4. Refresh your browser cache.
+
+### HACS (Manual)
+1. Open HACS in your Home Assistant instance.
 2. Click the 3 dots in the top right corner and select **Custom repositories**.
-3. Add your repository URL (`https://github.com/ciocotab-cpu/linear-gauge-card`).
+3. Add your repository URL (`https://github.com/ciocotab-cpu/another-linear-gauge-card`).
 4. Select **Dashboard** as the category and click **Add**.
 5. Close the modal, search for "Linear Gauge Card", and click **Download**.
 6. Refresh your browser cache.
 
 ### Manual
-1. Download `linear-gauge-card.js` from this repository.
+1. Download `another-linear-gauge-card.js` from this repository.
 2. Copy it into your `<config>/www/` directory.
 3. Go to **Settings > Dashboards > 3 dots (top right) > Resources**.
-4. Add a new resource with the URL `/local/linear-gauge-card.js` and set the Resource Type to `JavaScript Module`.
+4. Add a new resource with the URL `/local/another-linear-gauge-card.js` and set the Resource Type to `JavaScript Module`.
 
 ## Defining Segments
-
 You can define segments directly via the visual editor under the "Segments" expandable section. Because it uses Home Assistant's native object editor, you format your segments as a YAML list.
 
 **Example YAML snippet to paste into the Segments box:**
@@ -86,6 +92,5 @@ card:
       color: var(--error-color)
 ```
 
-
 ## Usage
-Simply add a new card to your dashboard and select **Linear Gauge Card** from the visual picker. You can configure all colors, limits, fonts, and labels directly in the UI.
+Simply add a new card to your dashboard and select **Another Linear Gauge Card** from the visual picker. You can configure all colors, limits, fonts, and labels directly in the UI.

@@ -16,12 +16,12 @@
         window.html = html;
         window.css = css;
     </script>    
-    <script type="module" src="linear-gauge-card.js"></script>
+    <script type="module" src="another-linear-gauge-card.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Anteprima Card</h2>
-        <linear-gauge-card id="preview"></linear-gauge-card>
+        <another-linear-gauge-card id="preview"></another-linear-gauge-card>
     </div>
     <script type="module" src="https://unpkg.com/iconify-icon@1.0.8/dist/iconify-icon.mjs"></script>
     <script>
@@ -38,7 +38,7 @@
     </script>
     <script>
         // Aspettiamo che l'elemento sia definito
-        customElements.whenDefined('linear-gauge-card').then(() => {
+        customElements.whenDefined('another-linear-gauge-card').then(() => {
             const card = document.getElementById('preview');
             
             // 1. Configurazione (metti qui i tuoi parametri)
