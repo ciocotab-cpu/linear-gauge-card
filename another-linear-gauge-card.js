@@ -1,7 +1,7 @@
-// linear-gauge-card.js
+// another-linear-gauge-card.js
 // Home Assistant Custom Card - Linear Gauge with Needle
 
-class LinearGaugeCard extends HTMLElement {
+class AnotherLinearGaugeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -264,10 +264,10 @@ _resolveSegmentsAndMax(min, configMax) {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        #align-items: flex-start;
-        #padding-top: 0px;
+        àalign-items: flex-start;
         width: 100%;
         height: 100%;
+        padding: 0 6px;
         box-sizing: border-box;
       }
 
@@ -286,8 +286,8 @@ _resolveSegmentsAndMax(min, configMax) {
         align-items: center;
         justify-content: center;
         width: 40px;
-        margin-left: 6px;
-        margin-right: 6px;
+        #margin-left: 6px;
+        #margin-right: 6px;
         height: 40px;
         border-radius: 50%;
         background-color: var(--state-icon-active-color, rgba(68, 115, 158, 0.2));
@@ -299,10 +299,13 @@ _resolveSegmentsAndMax(min, configMax) {
         flex-direction: column;
         justify-content: center;
         flex: 1;
+        margin-left: 6px;
+        margin-right: 6px;
         min-width: 0;
         height: 100%;
-        #margin-top:-8px;
+        margin-top: 0px;
       }
+
       .header {
         display: flex;
         flex-direction: row;
@@ -653,7 +656,7 @@ _resolveSegmentsAndMax(min, configMax) {
   }
 }
 
-customElements.define('linear-gauge-card', LinearGaugeCard);
+customElements.define('another-linear-gauge-card', AnotherLinearGaugeCard);
 
 // -------------------------------------------------------------
 // Editor Code Below
@@ -824,7 +827,7 @@ const SCHEMA = [
   }
 ];
 
-class LinearGaugeCardEditor extends HTMLElement {
+class AnotherLinearGaugeCardEditor extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -921,24 +924,24 @@ class LinearGaugeCardEditor extends HTMLElement {
   }
 }
 
-customElements.define("linear-gauge-editor", LinearGaugeCardEditor);
+customElements.define("another-linear-gauge-editor", AnotherLinearGaugeCardEditor);
 
 window.customCards = window.customCards || [];
-const cardIndex = window.customCards.findIndex(c => c.type === "linear-gauge-card");
+const cardIndex = window.customCards.findIndex(c => c.type === "another-linear-gauge-card");
 if (cardIndex === -1) {
   window.customCards.push({
-    type: 'linear-gauge-card',
-    name: 'Linear Gauge Card',
+    type: 'another-linear-gauge-card',
+    name: 'Another Linear Gauge Card',
     description: 'A linear gauge bar with needle indicator',
     preview: false,
   });
 }
 
-customElements.whenDefined('linear-gauge-card').then(() => {
-    const cardConstructor = customElements.get('linear-gauge-card');
+customElements.whenDefined('another-linear-gauge-card').then(() => {
+    const cardConstructor = customElements.get('another-linear-gauge-card');
 
     cardConstructor.getConfigElement = function() {
-        return document.createElement("linear-gauge-editor");
+        return document.createElement("another-linear-gauge-editor");
     };
 
     cardConstructor.getStubConfig = function() {
