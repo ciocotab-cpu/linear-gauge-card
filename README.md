@@ -4,7 +4,6 @@ This project is a fork of the project https://github.com/iljanev/ha-horizontal-g
 A highly customizable linear gauge card with a needle indicator for Home Assistant.
 Inspired by Home Assistant Tile card.
 
-
 ![Another Linear Gauge Card Examples](new.gif)
 ## My New Features
 - Transition between segment color can be smooth
