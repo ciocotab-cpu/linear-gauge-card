@@ -12,6 +12,7 @@ Inspired by Home Assistant Tile card.
 - Enable Needle Pulse and set pulse frequency (in msec)
 - Enable Card Pulse and set pulse frequency (in msec)
 - Set single/double line vertical dimension
+  
 ![Another Linear Gauge Card Examples](new.gif)
 
 <<<<<<< HEAD
@@ -26,6 +27,7 @@ Inspired by Home Assistant Tile card.
 - Needle indicator with customizable width, color, and shadow
 - Toggleable segment names and value labels
 - Extensive appearance overrides (font sizes, gauge thickness, custom units)
+  
 ![Linear Gauge Card Examples](image.png)
 
 ![Linear Gauge Card Examples](image.png)
