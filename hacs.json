@@ -1,6 +1,5 @@
 {
   "name": "Another Linear Gauge Card",
   "render_readme": true,
-  "filename": "another-linear-gauge-card.js",
-  "iot_class": "Local Push"
+  "filename": "another-linear-gauge-card.js"
 }
