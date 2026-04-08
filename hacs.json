@@ -2,6 +2,5 @@
   "name": "Another Linear Gauge Card",
   "render_readme": true,
   "filename": "another-linear-gauge-card.js",
-  "iot_class": "Local Push",
-  "description": "A highly customizable linear gauge card with a needle indicator for Home Assistant."
+  "iot_class": "Local Push"
 }
